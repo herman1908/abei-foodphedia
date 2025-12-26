@@ -333,7 +333,7 @@
     </script>
 
     <!-- REAL-TIME COUNTER (Vercel-ready) -->
-    <script>
+   <script>
   const PROJECT = "abei-foodphedia";
 
   async function loadCounter() {
@@ -341,18 +341,28 @@
       const res = await fetch(
         `https://api.simplecounter.space/hit/${PROJECT}`
       );
+
       const data = await res.json();
-      document.getElementById("visitorCounter").innerText = data.value;
+
+      const el = document.getElementById("visitorCounter");
+
+      if (el) {
+        el.innerText = data.value;
+      }
     } catch (err) {
-      // fallback (local only, supaya tidak kosong)
+      console.warn("Counter fallback:", err);
+
       let local = Number(localStorage.getItem("localCounter") || 1);
       localStorage.setItem("localCounter", local + 1);
-      document.getElementById("visitorCounter").innerText = local;
+
+      const el = document.getElementById("visitorCounter");
+      if (el) el.innerText = local;
     }
   }
 
   loadCounter();
 </script>
+
 
   </body>
 </html>
