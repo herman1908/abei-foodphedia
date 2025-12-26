@@ -334,23 +334,25 @@
 
     <!-- REAL-TIME COUNTER (Vercel-ready) -->
     <script>
-      const KEY = "abei-foodphedia-visitors-01";
+  const PROJECT = "abei-foodphedia";
 
-      function loadCounter() {
-        fetch(`https://api.countapi.xyz/hit/${KEY}`)
-          .then((res) => res.json())
-          .then((data) => {
-            const el = document.getElementById("visitorCounter");
-            if (el) {
-              el.innerText = data.value;
-              el.classList.add("changed");
-              setTimeout(() => el.classList.remove("changed"), 300);
-            }
-          });
-      }
+  async function loadCounter() {
+    try {
+      const res = await fetch(
+        `https://api.simplecounter.space/hit/${PROJECT}`
+      );
+      const data = await res.json();
+      document.getElementById("visitorCounter").innerText = data.value;
+    } catch (err) {
+      // fallback (local only, supaya tidak kosong)
+      let local = Number(localStorage.getItem("localCounter") || 1);
+      localStorage.setItem("localCounter", local + 1);
+      document.getElementById("visitorCounter").innerText = local;
+    }
+  }
 
-      loadCounter();
-      setInterval(loadCounter, 5000);
-    </script>
+  loadCounter();
+</script>
+
   </body>
 </html>
