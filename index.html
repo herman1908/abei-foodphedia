@@ -334,32 +334,17 @@
 
     <!-- REAL-TIME COUNTER (Vercel-ready) -->
    <script>
-  const PROJECT = "abei-foodphedia";
-
   async function loadCounter() {
     try {
-      const res = await fetch(
-        `https://api.simplecounter.space/hit/${PROJECT}`
-      );
-
+      const res = await fetch("/api/visit");
       const data = await res.json();
-
-      const el = document.getElementById("visitorCounter");
-
-      if (el) {
-        el.innerText = data.value;
-      }
-    } catch (err) {
-      console.warn("Counter fallback:", err);
-
+      document.getElementById("visitorCounter").innerText = data.value;
+    } catch {
       let local = Number(localStorage.getItem("localCounter") || 1);
       localStorage.setItem("localCounter", local + 1);
-
-      const el = document.getElementById("visitorCounter");
-      if (el) el.innerText = local;
+      document.getElementById("visitorCounter").innerText = local;
     }
   }
-
   loadCounter();
 </script>
 
