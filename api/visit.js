@@ -1,6 +1,6 @@
-import { kv } from "@vercel/kv";
+let count = 0;
 
-export default async function handler(req, res) {
-  const value = await kv.incr("abei-counter");
-  res.status(200).json({ value });
+export default function handler(req, res) {
+  count++;
+  res.status(200).json({ value: count });
 }

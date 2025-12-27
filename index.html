@@ -386,13 +386,13 @@
     <script>
       async function loadCounter() {
         try {
-          const res = await fetch("https://api.countapi.xyz/hit/abei-foodphedia/visitors");
+          const res = await fetch("/api/visitors");
           const data = await res.json();
 
           const el = document.getElementById("visitorCounter");
           if (el) el.innerText = data.value;
         } catch (e) {
-          console.warn("Counter fallback:", e);
+          console.warn("counter error:", e);
         }
       }
 
