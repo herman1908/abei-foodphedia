@@ -385,12 +385,19 @@
     <!-- REAL-TIME COUNTER (Vercel-ready) -->
     <script>
       async function loadCounter() {
-        const res = await fetch("https://api.countapi.xyz/hit/abei-foodphedia/visitors");
-        const data = await res.json();
-        document.getElementById("visitorCounter").innerText = data.value;
+        try {
+          const res = await fetch("https://api.countapi.xyz/hit/abei-foodphedia/visitors");
+          const data = await res.json();
+
+          const el = document.getElementById("visitorCounter");
+          if (el) el.innerText = data.value;
+        } catch (e) {
+          console.warn("Counter fallback:", e);
+        }
       }
 
       loadCounter();
+      setInterval(loadCounter, 5000);
     </script>
   </body>
 </html>
