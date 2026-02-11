@@ -75,6 +75,17 @@ html { scroll-behavior: smooth; }
 }
 
 .counter-bounce {
+  animation: scaleGlow 2s infinite;
+}
+
+@keyframes scaleGlow {
+  0% { transform: scale(1); filter: drop-shadow(0 0 0px orange); }
+  50% { transform: scale(1.08); filter: drop-shadow(0 0 8px orange); }
+  100% { transform: scale(1); filter: drop-shadow(0 0 0px orange); }
+}
+
+
+.counter-bounce {
   transition: transform .2s ease;
 }
 .counter-bounce.changed {
